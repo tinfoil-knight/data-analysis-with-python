@@ -14,10 +14,18 @@ def load():
     return pd.read_csv("src/iris.csv").drop('species', axis=1).values
 
 def lengths():
-    return 0
+    data = np.array(load())
+    return scipy.stats.pearsonr(data[:,0], data[:,2])[0]
 
 def correlations():
-    return np.array([])
+    data = load()
+    col_0 = np.array(data[:, 0])
+    col_1 = np.array(data[:, 1])
+    col_2 = np.array(data[:, 2])
+    col_3 = np.array(data[:, 3])
+
+    cor_data = np.array([col_0, col_1, col_2, col_3])
+    return np.corrcoef(cor_data)
 
 def main():
     print(lengths())
